@@ -109,6 +109,14 @@ button:hover {
   word-break: break-all;
 }
 
+#taskList span.completed {
+  color: "";
+}
+
+#taskList span.completed {
+  color: #888;
+}
+
 #taskList li.completed {
   background-color: #e6e6e6;
   border-color: #c0c0c0;

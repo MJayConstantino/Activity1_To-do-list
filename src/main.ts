@@ -12,17 +12,7 @@ class ToDoList {
     `;
 
     const checkbox = this.task.querySelector('input') as HTMLInputElement;
-    checkbox.addEventListener('change', () => this.toggle());
-  }
-
-  toggle() {
-    this.task.classList.toggle('completed');
-    const span = this.task.querySelector('span') as HTMLSpanElement;
-    if (this.task.classList.contains('completed')) {
-      span.style.color = '#888';
-    } else {
-      span.style.color = '';
-    }
+    checkbox.addEventListener('change', () => this.task.classList.toggle('completed'));
   }
 }
 

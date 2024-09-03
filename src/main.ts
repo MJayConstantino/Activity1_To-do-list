@@ -22,7 +22,10 @@ const addButton = document.getElementById('addTask') as HTMLButtonElement;
 
 function addTask() {
   const taskName = taskInput.value.trim();
-  if (taskName === "") return
+  if (taskName === "") {
+    alert("Input something first.")
+    return
+  }
   const todolist = new ToDoList(taskName);
   const deleteButton = todolist.task.querySelector('.deleteTask') as HTMLButtonElement;
   deleteButton.addEventListener('click', () => deleteTask(todolist.task));

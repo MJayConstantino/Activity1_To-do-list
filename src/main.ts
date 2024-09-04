@@ -17,6 +17,7 @@ class ToDoList {
   taskCategory: HTMLSelectElement;
   filtersContainer: HTMLDivElement;
   noTasksMessage: HTMLParagraphElement;
+  noTasksImage: HTMLImageElement;
   currentFilter: string = 'all';
 
   constructor() {
@@ -27,6 +28,7 @@ class ToDoList {
     this.taskCategory = document.getElementById('taskCategory') as HTMLSelectElement;
     this.filtersContainer = document.querySelector('.filters-container') as HTMLDivElement;
     this.noTasksMessage = document.getElementById('noTasksMessage') as HTMLParagraphElement;
+    this.noTasksImage = document.getElementById('noTasksImage') as HTMLImageElement;
 
     this.addButton.addEventListener('click', () => this.addTask());
     this.filtersContainer.addEventListener('click', (e) => this.handleFilter(e));
@@ -99,8 +101,10 @@ class ToDoList {
 
     if (sortedTasks.length === 0) {
       this.noTasksMessage.style.display = 'block';
+      this.noTasksImage.style.opacity = "1"
     } else {
       this.noTasksMessage.style.display = 'none';
+      this.noTasksImage.style.opacity = "0"
     }
 
   sortedTasks.forEach(task => {

@@ -70,26 +70,11 @@ h1 {
 .secondary-inputs {
   display: flex;
   align-items: center;
+  justify-content: center; /* Center the secondary inputs horizontally */
   gap: 10px;
+  width: 100%;
 }
 
-.add-category-container {
-  display: flex;
-  align-items: center;
-}
-
-.add-category-container input[type="text"] {
-  padding: 5px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: var(--input-bg-color);
-  color: var(--input-text-color);
-}
-
-.add-category-container button {
-  font-size: 10px;
-}
 
 .main-input {
   display: flex;
@@ -107,13 +92,34 @@ h1 {
   color: var(--input-text-color);
 }
 
-input[type="datetime-local"], select {
+input[type="datetime-local"], select, .add-category-container input[type="text"]{
   padding: 0.5em;
   font-size: 0.9em;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: var(--input-bg-color);
   color: var(--input-text-color);
+}
+
+.add-category-container {
+  display: flex;
+  align-items: center;
+}
+
+.add-category-container button {
+  font-size: 10px;
+}
+
+.custom-categories-container {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
+
+#customCategories {
+  display: inline-flex;
+  gap: 5px;
 }
 
 button {
@@ -140,6 +146,10 @@ button:hover {
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.5em;
+}
+
+.filters-container button:hover {
+  opacity: 0.9;
 }
 
 #taskList {
@@ -234,14 +244,9 @@ input[type="checkbox"] {
 }
 
 #noTasksMessage {
-  display: none;
   font-size: 1.2em;
   color: #888;
   margin-top: 2em;
-}
-
-.filters-container button:hover {
-  opacity: 0.9;
 }
 
 #noTasksContainer {
@@ -253,17 +258,4 @@ input[type="checkbox"] {
   width: 100px;
   height: auto;
   margin-top: 10px;
-}
-
-.add-category-container {
-  margin-top: 10px;
-}
-
-.custom-category {
-  margin-right: 5px;
-}
-
-.delete-category {
-  margin-left: 5px;
-  cursor: pointer;
 }

@@ -189,15 +189,6 @@ button:hover {
   color: #33cc66; /* Green */
 }
 
-#taskList li.pending {
-  background-color: #fff9e6; /* Light yellow */
-  border-color: #ffe699;
-}
-
-#taskList li.pending span {
-  color: #ffcc00; /* Yellow */
-}
-
 #taskList li.expired {
   background-color: #ffe6e6; /* Light red */
   border-color: #ffb3b3;

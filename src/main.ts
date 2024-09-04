@@ -17,6 +17,7 @@ class ToDoList {
   taskCategory: HTMLSelectElement;
   filtersContainer: HTMLDivElement;
   noTasksMessage: HTMLParagraphElement;
+  currentFilter: string = 'all';
 
   constructor() {
     this.taskInput = document.getElementById('taskInput') as HTMLInputElement;
@@ -34,7 +35,7 @@ class ToDoList {
     this.renderTasks();
     
     setInterval(() => {
-      this.renderTasks();
+      this.renderTasks(this.currentFilter);
     }, 1000);
     
   }
@@ -90,16 +91,17 @@ class ToDoList {
   }
 
   renderTasks(filter: string = 'all'): void {
-  this.taskList.innerHTML = '';
+    this.currentFilter = filter;
+    this.taskList.innerHTML = '';
 
-  const filteredTasks = this.filterTasks(filter);
-  const sortedTasks = this.sortTasksByDeadline(filteredTasks);
+    const filteredTasks = this.filterTasks(filter);
+    const sortedTasks = this.sortTasksByDeadline(filteredTasks);
 
-  if (sortedTasks.length === 0) {
-    this.noTasksMessage.style.display = 'block';
-  } else {
-    this.noTasksMessage.style.display = 'none';
-  }
+    if (sortedTasks.length === 0) {
+      this.noTasksMessage.style.display = 'block';
+    } else {
+      this.noTasksMessage.style.display = 'none';
+    }
 
   sortedTasks.forEach(task => {
     const li = document.createElement('li');
@@ -144,10 +146,10 @@ class ToDoList {
         return this.tasks.filter(task => task.completed);
       case 'expired':
         return this.tasks.filter(task => this.isTaskExpired(task));
-      case 'personal':
-      case 'work':
-      case 'school':
-      case 'home':
+      case 'Personal':
+      case 'Work':
+      case 'School':
+      case 'Home':
       case 'No category':
         return this.tasks.filter(task => task.category === filter);
       default:

@@ -4,23 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive To-do List</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="app">
-      <a href="https://www.flaticon.com/free-icons/checklist" title="checklist icons">
-        <img src="./src/checklist.png" alt="Checklist">
-      </a>
-      <h1>To-do List</h1>
-      <div class="input-container">
-        <input 
-        type="text" 
-        id="taskInput" 
-        placeholder="Add a new task"
-        required
-        >
-        <button id="addTask">Add Task</button>
+      <div class="header-container">
+        <img src="./src/checklist.png" alt="Checklist" />
+        <h1>To-do List</h1>
       </div>
-      <ul id="taskList"></ul>
+      <div class="main-content">
+        <div class="input-container">
+          <div class="secondary-inputs">
+            <input type="datetime-local" id="taskDeadline" />
+            <select id="taskCategory">
+              <option value="" selected>None</option>
+              <option value="personal">Personal</option>
+              <option value="work">Work</option>
+              <option value="school">School</option>
+              <option value="home">Home</option>
+            </select>
+          </div>
+          <div class="main-input">
+            <input type="text" id="taskInput" placeholder="Add a new task" required />
+            <button id="addTask">Add Task</button>
+          </div>
+        </div>
+        <div class="filters-container">
+          <button data-filter="all">All</button>
+          <button data-filter="pending">Pending</button>
+          <button data-filter="completed">Completed</button>
+          <button data-filter="expired">Expired</button>
+          <button data-filter="personal">Personal</button>
+          <button data-filter="work">Work</button>
+          <button data-filter="school">School</button>
+          <button data-filter="home">Home</button>
+        </div>
+        <ul id="taskList"></ul>
+        <p id="noTasksMessage">No tasks to display</p>
+      </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

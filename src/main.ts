@@ -32,6 +32,11 @@ class ToDoList {
 
     this.loadTasksFromLocalStorage();
     this.renderTasks();
+    
+    setInterval(() => {
+      this.renderTasks();
+    }, 1000);
+    
   }
 
   addTask(): void {

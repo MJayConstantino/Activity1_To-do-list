@@ -137,21 +137,20 @@ class ToDoList {
   });
 }
 
-
   filterTasks(filter: string): Task[] {
-    switch (filter) {
+    switch (filter.toLowerCase()) {
       case 'pending':
         return this.tasks.filter(task => !task.completed && !this.isTaskExpired(task));
       case 'completed':
         return this.tasks.filter(task => task.completed);
       case 'expired':
         return this.tasks.filter(task => this.isTaskExpired(task));
-      case 'Personal':
-      case 'Work':
-      case 'School':
-      case 'Home':
-      case 'No category':
-        return this.tasks.filter(task => task.category === filter);
+      case 'personal':
+      case 'work':
+      case 'school':
+      case 'home':
+      case 'none':
+        return this.tasks.filter(task => task.category.toLowerCase() === filter.toLowerCase());
       default:
         return this.tasks;
     }

@@ -1,4 +1,4 @@
-import './style.css'
+import './style.css';
 
 interface Task {
   id: string;
@@ -18,6 +18,7 @@ class ToDoList {
   filtersContainer: HTMLDivElement;
   noTasksMessage: HTMLParagraphElement;
   noTasksImage: HTMLImageElement;
+  sortSelect: HTMLSelectElement;
   currentFilter: string = 'all';
 
   constructor() {
@@ -29,17 +30,18 @@ class ToDoList {
     this.filtersContainer = document.querySelector('.filters-container') as HTMLDivElement;
     this.noTasksMessage = document.getElementById('noTasksMessage') as HTMLParagraphElement;
     this.noTasksImage = document.getElementById('noTasksImage') as HTMLImageElement;
+    this.sortSelect = document.getElementById('sortTasks') as HTMLSelectElement;
 
+    this.sortSelect.addEventListener('change', () => this.renderTasks(this.currentFilter));
     this.addButton.addEventListener('click', () => this.addTask());
     this.filtersContainer.addEventListener('click', (e) => this.handleFilter(e));
 
     this.loadTasksFromLocalStorage();
     this.renderTasks();
-    
+
     setInterval(() => {
       this.renderTasks(this.currentFilter);
     }, 1000);
-    
   }
 
   addTask(): void {
@@ -50,7 +52,7 @@ class ToDoList {
     }
 
     const newTask: Task = {
-      id: Date.now().toString(),
+      id: Date.now().toString(),  // Using the timestamp as the ID
       name: taskName,
       completed: false,
       category: this.taskCategory.value || 'No category',
@@ -101,45 +103,45 @@ class ToDoList {
 
     if (sortedTasks.length === 0) {
       this.noTasksMessage.style.display = 'block';
-      this.noTasksImage.style.opacity = "1"
+      this.noTasksImage.style.opacity = "1";
     } else {
       this.noTasksMessage.style.display = 'none';
-      this.noTasksImage.style.opacity = "0"
+      this.noTasksImage.style.opacity = "0";
     }
 
-  sortedTasks.forEach(task => {
-    const li = document.createElement('li');
-    const categoryClass = `header-${task.category.replace(/\s+/g, '-').toLowerCase()}` || 'header-none';
+    sortedTasks.forEach(task => {
+      const li = document.createElement('li');
+      const categoryClass = `header-${task.category.replace(/\s+/g, '-').toLowerCase()}` || 'header-none';
 
-    li.innerHTML = `
-      <header class="${categoryClass}">
-        <span class="category">${task.category || 'None'}</span>
-        <span class="deadline">${this.formatDeadline(task.deadline)}</span>
-      </header>
-      <div class="task-content">
-        <input type="checkbox" ${task.completed ? 'checked' : ''}>
-        <span class="${task.completed ? 'completed' : ''}">${task.name}</span>
-      </div>
-      <button class="deleteTask">Delete</button>
-    `;
+      li.innerHTML = `
+        <header class="${categoryClass}">
+          <span class="category">${task.category || 'None'}</span>
+          <span class="deadline">${this.formatDeadline(task.deadline)}</span>
+        </header>
+        <div class="task-content">
+          <input type="checkbox" ${task.completed ? 'checked' : ''}>
+          <span class="${task.completed ? 'completed' : ''}">${task.name}</span>
+        </div>
+        <button class="deleteTask">Delete</button>
+      `;
 
-    if (this.isTaskExpired(task)) {
-      li.classList.add('expired');
-    }
+      if (this.isTaskExpired(task)) {
+        li.classList.add('expired');
+      }
 
-    if (task.completed) {
-      li.classList.add('completed');
-    }
+      if (task.completed) {
+        li.classList.add('completed');
+      }
 
-    const checkbox = li.querySelector('input') as HTMLInputElement;
-    checkbox.addEventListener('change', () => this.toggleTaskCompletion(task.id));
+      const checkbox = li.querySelector('input') as HTMLInputElement;
+      checkbox.addEventListener('change', () => this.toggleTaskCompletion(task.id));
 
-    const deleteButton = li.querySelector('.deleteTask') as HTMLButtonElement;
-    deleteButton.addEventListener('click', () => this.deleteTask(task.id));
+      const deleteButton = li.querySelector('.deleteTask') as HTMLButtonElement;
+      deleteButton.addEventListener('click', () => this.deleteTask(task.id));
 
-    this.taskList.appendChild(li);
-  });
-}
+      this.taskList.appendChild(li);
+    });
+  }
 
   filterTasks(filter: string): Task[] {
     switch (filter.toLowerCase()) {
@@ -161,11 +163,33 @@ class ToDoList {
   }
 
   sortTasksByDeadline(tasks: Task[]): Task[] {
+    const sortValue = this.sortSelect.value;
+  
     return tasks.sort((a, b) => {
-      if (a.deadline === 'No deadline') return 1;
-      if (b.deadline === 'No deadline') return -1;
-      return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+      if (sortValue === 'nearest' || sortValue === 'farthest') {
+        const deadlineComparison = this.compareDates(a.deadline, b.deadline, sortValue === 'nearest' ? 'asc' : 'desc');
+        if (deadlineComparison !== 0) return deadlineComparison;
+      }
+      
+      const idA = parseInt(a.id);
+      const idB = parseInt(b.id);
+      return sortValue === 'oldest' ? idA - idB : idB - idA;
     });
+  }
+
+  compareDates(a: string, b: string, order: 'asc' | 'desc'): number {
+    if (a === 'No deadline' && b === 'No deadline') return 0;
+    if (a === 'No deadline') return 1;
+    if (b === 'No deadline') return -1;
+
+    const dateA = new Date(a).getTime();
+    const dateB = new Date(b).getTime();
+
+    if (order === 'asc') {
+      return dateA - dateB;
+    } else {
+      return dateB - dateA;
+    }
   }
 
   isTaskExpired(task: Task): boolean {

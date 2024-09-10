@@ -59,12 +59,28 @@ h1 {
   flex-grow: 1;
 }
 
+.sorting-container {
+  margin: 1em 0;
+  display: flex;
+  justify-content: center;
+}
+
+#sortTasks {
+  padding: 0.5em;
+  font-size: 0.9em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  cursor: pointer;
+}
+
 .input-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 1em;
-  gap: 0.5em;
+  gap: 1em;
 }
 
 .secondary-inputs {
@@ -73,8 +89,8 @@ h1 {
   justify-content: center;
   gap: 10px;
   width: 100%;
+  flex-wrap: wrap;
 }
-
 
 .main-input {
   display: flex;
@@ -92,34 +108,15 @@ h1 {
   color: var(--input-text-color);
 }
 
-input[type="datetime-local"], select, .add-category-container input[type="text"]{
+input[type="datetime-local"], 
+select, 
+#sortTasks {
   padding: 0.5em;
   font-size: 0.9em;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: var(--input-bg-color);
   color: var(--input-text-color);
-}
-
-.add-category-container {
-  display: flex;
-  align-items: center;
-}
-
-.add-category-container button {
-  font-size: 10px;
-}
-
-.custom-categories-container {
-  width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding-bottom: 10px;
-}
-
-#customCategories {
-  display: inline-flex;
-  gap: 5px;
 }
 
 button {

@@ -149,10 +149,28 @@ button:hover {
   opacity: 0.9;
 }
 
+.scrollable-task-list {
+  max-height: 32.5rem;
+  overflow-y: auto;
+
+}
+
+.scrollable-task-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-task-list::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+.scrollable-task-list::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
 #taskList {
   list-style-type: none;
   padding: 0;
-  margin-top: 1.5em;
 }
 
 #taskList li {

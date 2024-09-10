@@ -52,7 +52,7 @@ class ToDoList {
     }
 
     const newTask: Task = {
-      id: Date.now().toString(),  // Using the timestamp as the ID
+      id: Date.now().toString(),
       name: taskName,
       completed: false,
       category: this.taskCategory.value || 'No category',
@@ -167,17 +167,17 @@ class ToDoList {
   
     return tasks.sort((a, b) => {
       if (sortValue === 'nearest' || sortValue === 'farthest') {
-        const deadlineComparison = this.compareDates(a.deadline, b.deadline, sortValue === 'nearest' ? 'asc' : 'desc');
+        const deadlineComparison = this.compareDates(a.deadline, b.deadline, sortValue === 'nearest' ? 'ascending' : 'descending');
         if (deadlineComparison !== 0) return deadlineComparison;
       }
-      
+
       const idA = parseInt(a.id);
       const idB = parseInt(b.id);
       return sortValue === 'oldest' ? idA - idB : idB - idA;
     });
   }
 
-  compareDates(a: string, b: string, order: 'asc' | 'desc'): number {
+  compareDates(a: string, b: string, order: 'ascending' | 'descending'): number {
     if (a === 'No deadline' && b === 'No deadline') return 0;
     if (a === 'No deadline') return 1;
     if (b === 'No deadline') return -1;
@@ -185,7 +185,7 @@ class ToDoList {
     const dateA = new Date(a).getTime();
     const dateB = new Date(b).getTime();
 
-    if (order === 'asc') {
+    if (order === 'ascending') {
       return dateA - dateB;
     } else {
       return dateB - dateA;

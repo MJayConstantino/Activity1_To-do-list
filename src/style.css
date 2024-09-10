@@ -70,7 +70,7 @@ h1 {
 .secondary-inputs {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the secondary inputs horizontally */
+  justify-content: center;
   gap: 10px;
   width: 100%;
 }
@@ -206,22 +206,22 @@ button:hover {
 }
 
 #taskList li.completed {
-  background-color: #e6ffed; /* Light green */
+  background-color: #e6ffed;
   border-color: #b3ffcc;
 }
 
 #taskList li.completed span {
   text-decoration: line-through;
-  color: #33cc66; /* Green */
+  color: #33cc66;
 }
 
 #taskList li.expired {
-  background-color: #ffe6e6; /* Light red */
+  background-color: #ffe6e6;
   border-color: #ffb3b3;
 }
 
 #taskList li.expired span {
-  color: #ff6666; /* Red */
+  color: #ff6666;
 }
 
 input[type="checkbox"] {

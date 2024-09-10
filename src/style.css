@@ -150,9 +150,8 @@ button:hover {
 }
 
 .scrollable-task-list {
-  height: 30em;
-  overflow-y: auto;
-
+  height: 60vh;
+  overflow-y: scroll;
 }
 
 .scrollable-task-list::-webkit-scrollbar {

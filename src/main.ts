@@ -101,6 +101,8 @@ class ToDoList {
     const filteredTasks = this.filterTasks(filter);
     const sortedTasks = this.sortTasksByDeadline(filteredTasks);
 
+    console.log(sortedTasks.length);
+
     if (sortedTasks.length === 0) {
       this.noTasksMessage.style.display = 'block';
       this.noTasksImage.style.opacity = "1";
@@ -213,3 +215,4 @@ class ToDoList {
 }
 
 new ToDoList();
+
